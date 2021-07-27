@@ -6,22 +6,22 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class CustomerRequestDto {
 
     @Schema(description = "ID заказчика")
-    private int id_customer;
+    private int idCustomer;
 
 
     @Schema(description = "Имя заказчика")
-    private String name_customer;
+    private String nameCustomer;
 
-    public void setId_customer(int id_customer) {
-        this.id_customer = id_customer;
+    public void setIdCustomer(int idCustomer) {
+        this.idCustomer = idCustomer;
 
     }
 
-    public String getName_customer() {
-        return name_customer;
+    public String getNameCustomer() {
+        return nameCustomer;
     }
 
-    public void setName_customer(String name_customer) {
-        this.name_customer = name_customer;
+    public void setNameCustomer(String nameCustomer) {
+        this.nameCustomer = nameCustomer;
     }
 }

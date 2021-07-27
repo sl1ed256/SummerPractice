@@ -1,6 +1,6 @@
 package com.myproject.antaev.rest.dto;
 
-import com.myproject.antaev.rest.data_type.Role;
+import com.myproject.antaev.rest.data_type.UserRights;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 import java.util.List;
@@ -9,35 +9,35 @@ import java.util.List;
 public class UserRequestDto {
 
     @Schema(description = "ID пользователя")
-    private int user_id;
+    private int userId;
 
     @Schema(description = "Имя пользователя")
-    private String name_user;
+    private String nameUser;
     @Schema(description = "Роли пользователя")
-    private List<Role> roles;
+    private List<UserRights> userRights;
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public String getName_user() {
-        return name_user;
+    public String getNameUser() {
+        return nameUser;
     }
 
-    public void setName_user(String name_user) {
-        this.name_user = name_user;
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public List<UserRights> getRoles() {
+        return userRights;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRoles(List<UserRights> userRights) {
+        this.userRights = userRights;
     }
 
 

@@ -7,30 +7,30 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "Проект (запрос)")
 public class ProjectRequestDto {
     @Schema(description = "ID проекта")
-    private int project_number;
+    private int projectNumber;
     @Schema(description = "Наименование проекта")
-    private String name_of_project;
+    private String nameOfProject;
     @Schema(description = "Заказчик")
     private CustomerResponseDto customer;
     @Schema(description = "Версия релиза")
-    private int release_version;
+    private int releaseVersion;
     @Schema(description = "Статус проекта")
     private StatusProject status;
 
-    public int getProject_number() {
-        return project_number;
+    public int getProjectNumber() {
+        return projectNumber;
     }
 
-    public void setProject_number(int project_number) {
-        this.project_number = project_number;
+    public void setProjectNumber(int projectNumber) {
+        this.projectNumber = projectNumber;
     }
 
-    public String getName_of_project() {
-        return name_of_project;
+    public String getNameOfProject() {
+        return nameOfProject;
     }
 
-    public void setName_of_project(String name_of_project) {
-        this.name_of_project = name_of_project;
+    public void setNameOfProject(String nameOfProject) {
+        this.nameOfProject = nameOfProject;
     }
 
     public CustomerResponseDto getCustomer() {
@@ -41,12 +41,12 @@ public class ProjectRequestDto {
         this.customer = customer;
     }
 
-    public Integer getRelease_version() {
-        return release_version;
+    public int getReleaseVersion() {
+        return releaseVersion;
     }
 
-    public void setRelease_version(Integer release_version) {
-        this.release_version = release_version;
+    public void setReleaseVersion(Integer releaseVersion) {
+        this.releaseVersion = releaseVersion;
     }
 
     public StatusProject getStatus() {

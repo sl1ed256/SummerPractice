@@ -41,22 +41,22 @@ public class ProjectController {
     @Operation(summary = "Создание проекта")
     public ResponseEntity<ProjectResponseDto> createProject(@RequestBody ProjectRequestDto requestDto) {
         return ResponseEntity.ok()
-                .body(new ProjectResponseDto(3, requestDto.getName_of_project(), requestDto.getCustomer(), 2,
+                .body(new ProjectResponseDto(3, requestDto.getNameOfProject(), requestDto.getCustomer(), 2,
                         requestDto.getStatus()));
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/{idProject}")
     @Operation(summary = "Изменение проекта")
     public ResponseEntity<ProjectResponseDto> updateProject(@RequestBody ProjectRequestDto requestDto,
-                                                            @PathVariable Long id) {
+                                                            @PathVariable int idProject) {
         return ResponseEntity.ok()
-                .body(new ProjectResponseDto(3, "Motya", new CustomerResponseDto(1, "Name1"), requestDto.getRelease_version(),
+                .body(new ProjectResponseDto(3, "Motya", new CustomerResponseDto(1, "Name1"), requestDto.getReleaseVersion(),
                         requestDto.getStatus()));
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/{idProject}")
     @Operation(summary = "Удаление проекта")
-    public ResponseEntity<?> deleteProject(@PathVariable Long id) throws FileNotFoundException {
+    public ResponseEntity<?> deleteProject(@PathVariable int idProject) throws FileNotFoundException {
         throw new FileNotFoundException();
     }
 }

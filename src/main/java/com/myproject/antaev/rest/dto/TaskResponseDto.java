@@ -7,40 +7,40 @@ import io.swagger.v3.oas.annotations.media.Schema;
 public class TaskResponseDto {
 
     @Schema(description = "ID проекта")
-    private int project_number;
+    private int projectNumber;
     @Schema(description = "Версия релиза")
-    private int release_version;
+    private int releaseVersion;
     @Schema(description = "ID задачи")
-    private int task_number;
+    private int taskNumber;
     @Schema(description = "Создатель задачи")
     private UserResponseDto author;
     @Schema(description = "Исполнитель задачи")
     private UserResponseDto performer;
     @Schema(description = "Имя задачи")
-    private String task_name;
+    private String taskName;
     @Schema(description = "Статус задачи")
-    private StatusTask task_status;
+    private StatusTask taskStatus;
 
-    public TaskResponseDto(int project_number, int release_version, int task_number, UserResponseDto author, String task_name, StatusTask task_status) {
-        this.project_number = project_number;
-        this.release_version = release_version;
-        this.task_number = task_number;
+    public TaskResponseDto(int projectNumber, int releaseVersion, int taskNumber, UserResponseDto author, String taskName, StatusTask taskStatus) {
+        this.projectNumber = projectNumber;
+        this.releaseVersion = releaseVersion;
+        this.taskNumber = taskNumber;
         this.author = author;
         this.performer = performer;
-        this.task_name = task_name;
-        this.task_status = task_status;
+        this.taskName = taskName;
+        this.taskStatus = taskStatus;
     }
 
-    public int getProject_number() {
-        return project_number;
+    public int getProjectNumber() {
+        return projectNumber;
     }
 
-    public int getRelease_version() {
-        return release_version;
+    public int getReleaseVersion() {
+        return releaseVersion;
     }
 
-    public int getTask_number() {
-        return task_number;
+    public int getTaskNumber() {
+        return taskNumber;
     }
 
     public UserResponseDto getAuthor() {
@@ -51,12 +51,12 @@ public class TaskResponseDto {
         return author;
     }
 
-    public String getTask_name() {
-        return task_name;
+    public String getTaskName() {
+        return taskName;
     }
 
-    public StatusTask getTask_status() {
-        return task_status;
+    public StatusTask getTaskStatus() {
+        return taskStatus;
     }
 
 }

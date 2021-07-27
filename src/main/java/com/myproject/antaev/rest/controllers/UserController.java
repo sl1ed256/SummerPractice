@@ -1,7 +1,7 @@
 package com.myproject.antaev.rest.controllers;
 
 
-import com.myproject.antaev.rest.data_type.Role;
+import com.myproject.antaev.rest.data_type.UserRights;
 import com.myproject.antaev.rest.dto.UserRequestDto;
 import com.myproject.antaev.rest.dto.UserResponseDto;
 
@@ -41,24 +41,24 @@ public class UserController {
     @PostMapping
     @Operation(summary = "Создать пользователя")
     public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto requestDto) {
-        List<Role> roles = new ArrayList<>();
-        roles.add(Role.ALL);
+        List<UserRights> userRights = new ArrayList<>();
+        userRights.add(UserRights.ALL);
         return ResponseEntity.ok()
-                .body(new UserResponseDto(3, requestDto.getName_user(), roles));
+                .body(new UserResponseDto(3, requestDto.getNameUser(), userRights));
     }
 
-    @PutMapping(value = "/{user_id}")
+    @PutMapping(value = "/{userId}")
     @Operation(summary = "Измененить пользователя")
     public ResponseEntity<UserResponseDto> updateUser(@RequestBody UserRequestDto requestDto,
-                                                      @PathVariable int user_id) {
-        List<Role> roles = new ArrayList<>();
+                                                      @PathVariable int userId) {
+        List<UserRights> userRights = new ArrayList<>();
         return ResponseEntity.ok()
-                .body(new UserResponseDto(user_id, requestDto.getName_user(), roles));
+                .body(new UserResponseDto(userId, requestDto.getNameUser(), userRights));
     }
 
-    @DeleteMapping(value = "/{user_id}")
+    @DeleteMapping(value = "/{userId}")
     @Operation(summary = "Удалить пользователя")
-    public ResponseEntity<?> deleteUser(@PathVariable int user_id) {
+    public ResponseEntity<?> deleteUser(@PathVariable int userId) {
         return ResponseEntity.ok().build();
     }
 

@@ -1,5 +1,6 @@
 package com.myproject.antaev.rest.controllers;
 
+import com.myproject.antaev.rest.controllers.exceptions.TestRuntimeExceptions;
 import com.myproject.antaev.rest.dto.ReleaseRequestDto;
 import com.myproject.antaev.rest.dto.ReleaseResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -38,20 +39,20 @@ public class ReleaseController {
     @Operation(summary = "Создание релиза")
     public ResponseEntity<ReleaseResponseDto> createRelease(@RequestBody ReleaseRequestDto requestDto) {
         return ResponseEntity.ok()
-                .body(new ReleaseResponseDto(1, requestDto.getRelease_version(), new Date(), new Date()));
+                .body(new ReleaseResponseDto(1, requestDto.getReleaseVersion(), new Date(), new Date()));
     }
 
-    @PutMapping(value = "/{release_id}")
+    @PutMapping(value = "/{releaseId}")
     @Operation(summary = "Изменение релиза")
     public ResponseEntity<ReleaseResponseDto> updateRelease(@RequestBody ReleaseRequestDto requestDto,
-                                                            @PathVariable int release_id) {
+                                                            @PathVariable int releaseId) {
         return ResponseEntity.ok()
-                .body(new ReleaseResponseDto(release_id, requestDto.getRelease_version(), requestDto.getStart_time(), requestDto.getEnd_time()));
+                .body(new ReleaseResponseDto(releaseId, requestDto.getReleaseVersion(), requestDto.getStartTime(), requestDto.getEndTime()));
     }
 
-    @DeleteMapping(value = "/{release_id}")
+    @DeleteMapping(value = "/{releaseId}")
     @Operation(summary = "Удаление релиза")
-    public ResponseEntity<?> deleteRelease(@PathVariable Long release_id) {
+    public ResponseEntity<?> deleteRelease(@PathVariable Long releaseId) {
         throw new TestRuntimeExceptions();
     }
 }

@@ -6,43 +6,43 @@ import io.swagger.v3.oas.annotations.media.Schema;
 @Schema(description = "Задача (запрос)")
 public class TaskRequestDto {
     @Schema(description = "ID проекта")
-    private int project_number;
+    private int projectNumber;
     @Schema(description = "Версия релиза")
-    private int release_version;
+    private int releaseVersion;
     @Schema(description = "ID задачи")
-    private int task_number;
+    private int taskNumber;
 
     @Schema(description = "Создатель задачи")
     private UserResponseDto author;
     @Schema(description = "Исполнитель задачи")
     private UserResponseDto performer;
     @Schema(description = "Имя задачи")
-    private String task_name;
+    private String taskName;
     @Schema(description = "Статус задачи")
-    private StatusTask task_status;
+    private StatusTask taskStatus;
 
-    public int getProject_number() {
-        return project_number;
+    public int getProjectNumber() {
+        return projectNumber;
     }
 
-    public void setProject_number(int project_number) {
-        this.project_number = project_number;
+    public void setProjectNumber(int projectNumber) {
+        this.projectNumber = projectNumber;
     }
 
-    public int getRelease_version() {
-        return release_version;
+    public int getReleaseVersion() {
+        return releaseVersion;
     }
 
-    public void setRelease_version(int release_version) {
-        this.release_version = release_version;
+    public void setReleaseVersion(int releaseVersion) {
+        this.releaseVersion = releaseVersion;
     }
 
-    public int getTask_number() {
-        return task_number;
+    public int getTaskNumber() {
+        return taskNumber;
     }
 
-    public void setTask_number(int task_number) {
-        this.task_number = task_number;
+    public void setTaskNumber(int taskNumber) {
+        this.taskNumber = taskNumber;
     }
 
     public UserResponseDto getAuthor() {
@@ -61,20 +61,20 @@ public class TaskRequestDto {
         this.performer = performer;
     }
 
-    public String getTask_name() {
-        return task_name;
+    public String getTaskName() {
+        return taskName;
     }
 
-    public void setTask_name(String task_name) {
-        this.task_name = task_name;
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
     }
 
-    public StatusTask getTask_status() {
-        return task_status;
+    public StatusTask getTaskStatus() {
+        return taskStatus;
     }
 
-    public void setTask_status(StatusTask task_status) {
-        this.task_status = task_status;
+    public void setTaskStatus(StatusTask taskStatus) {
+        this.taskStatus = taskStatus;
     }
 
 }

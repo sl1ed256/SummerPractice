@@ -6,7 +6,14 @@ import com.myproject.antaev.rest.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -33,22 +40,22 @@ public class TaskController {
     @Operation(summary = "Создание задачи")
     public ResponseEntity<TaskResponseDto> createTask(@RequestBody TaskRequestDto requestDto) {
         return ResponseEntity.ok()
-                .body(new TaskResponseDto(3, requestDto.getTask_number(), requestDto.getTask_name(),
-                        new UserResponseDto(1, "Motya", new ArrayList<>()), new ProjectResponseDto(1,"s", new CustomerResponseDto(4,"Mat"),1, StatusProject.OPEN);
+                .body(new TaskResponseDto(3, requestDto.getTaskNumber(), requestDto.getTaskName(),
+                        new UserResponseDto(1, "Motya", new ArrayList<>()), new ProjectResponseDto()));
     }
 
-    @PutMapping(value = "/{task_id}")
+    @PutMapping(value = "/{taskId}")
     @Operation(summary = "Изменение задачи")
     public ResponseEntity<TaskResponseDto> updateTask(@RequestBody TaskRequestDto requestDto,
-                                                      @PathVariable int task_id) {
+                                                      @PathVariable int taskId) {
         return ResponseEntity.ok()
-                .body(new TaskResponseDto(task_id, requestDto.getTask_name(), requestDto.getTask_name(),
+                .body(new TaskResponseDto(taskId, requestDto.getTaskName(), requestDto.getTaskName(),
                         new UserResponseDto(1, "Motya",new ArrayList<>() ), new ProjectResponseDto()));
     }
 
-    @DeleteMapping(value = "/{task_id}")
+    @DeleteMapping(value = "/{taskId}")
     @Operation(summary = "Удаление задачи")
-    public ResponseEntity<?> deleteTask(@PathVariable int task_id) throws IOException {
+    public ResponseEntity<?> deleteTask(@PathVariable int taskId) throws IOException {
         throw new FileNotFoundException();
     }
 

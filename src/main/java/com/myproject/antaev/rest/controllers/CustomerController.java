@@ -37,20 +37,20 @@ public class CustomerController {
     @Operation(summary = "Создание клиента")
     public ResponseEntity<CustomerResponseDto> createCustomer(@RequestBody CustomerRequestDto requestDto) {
         return ResponseEntity.ok()
-                .body(new CustomerResponseDto(1, requestDto.getName_customer()));
+                .body(new CustomerResponseDto(1, requestDto.getNameCustomer()));
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "/{idCustomer}")
     @Operation(summary = "Изменение данных клиента")
     public ResponseEntity<CustomerResponseDto> updateCustomer(@RequestBody CustomerRequestDto requestDto,
-                                                              @PathVariable int id) {
+                                                              @PathVariable int idCustomer) {
         return ResponseEntity.ok()
-                .body(new CustomerResponseDto(id, requestDto.getName_customer()));
+                .body(new CustomerResponseDto(idCustomer, requestDto.getNameCustomer()));
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "/{idCustomer}")
     @Operation(summary = "Удаление клиента")
-    public ResponseEntity<?> deleteCustomer(@PathVariable int id) {
+    public ResponseEntity<?> deleteCustomer(@PathVariable int idCustomer) {
         return ResponseEntity.ok().build();
     }
 }
