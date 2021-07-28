@@ -15,12 +15,7 @@ public class ReleaseResponseDto {
     @Schema(description = "Дата конца релиза")
     private Date endTime;
 
-    public ReleaseResponseDto(int project_number, int releaseVersion, Date startTime, Date endTime) {
-        this.projectNumber = project_number;
-        this.releaseVersion = releaseVersion;
-        this.startTime = startTime;
-        this.endTime = endTime;
-    }
+
 
     public int getProject_number() {
         return projectNumber;

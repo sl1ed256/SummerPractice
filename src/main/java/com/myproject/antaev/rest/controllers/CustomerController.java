@@ -2,6 +2,7 @@ package com.myproject.antaev.rest.controllers;
 
 import com.myproject.antaev.rest.dto.CustomerRequestDto;
 import com.myproject.antaev.rest.dto.CustomerResponseDto;
+import com.myproject.antaev.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -22,35 +23,38 @@ import java.util.List;
 @RequestMapping("/api/customers")
 @Tag(name = "Заказчики", description = "Редактирование заказчиков")
 public class CustomerController {
+    private final CustomerService service;
+
+    public CustomerController(CustomerService service) {
+        this.service = service;
+    }
 
     @GetMapping
     @Operation(summary = "Список клиентов")
-    public ResponseEntity<List<CustomerResponseDto>> getCustomers() {
+    public ResponseEntity<List<CustomerResponseDto>> getListCustomers() {
         List<CustomerResponseDto> list = new ArrayList<>();
-        list.add(new CustomerResponseDto(1, "Name1"));
-        list.add(new CustomerResponseDto(2, "Name2"));
-        list.add(new CustomerResponseDto(3, "Name3"));
         return ResponseEntity.ok(list);
     }
 
     @PostMapping
     @Operation(summary = "Создание клиента")
     public ResponseEntity<CustomerResponseDto> createCustomer(@RequestBody CustomerRequestDto requestDto) {
-        return ResponseEntity.ok()
-                .body(new CustomerResponseDto(1, requestDto.getNameCustomer()));
+        CustomerResponseDto customerResponseDto = service.createCustomer(requestDto);
+        return ResponseEntity.ok(customerResponseDto);
     }
 
     @PutMapping(value = "/{idCustomer}")
     @Operation(summary = "Изменение данных клиента")
-    public ResponseEntity<CustomerResponseDto> updateCustomer(@RequestBody CustomerRequestDto requestDto,
-                                                              @PathVariable int idCustomer) {
-        return ResponseEntity.ok()
-                .body(new CustomerResponseDto(idCustomer, requestDto.getNameCustomer()));
+    public ResponseEntity<CustomerResponseDto> updateCustomer(@RequestBody CustomerRequestDto requestDto, @PathVariable int idCustomer) {
+        CustomerResponseDto customerResponseDto = service.updateCustomer(requestDto, idCustomer);
+        return ResponseEntity.ok(customerResponseDto);
     }
 
     @DeleteMapping(value = "/{idCustomer}")
     @Operation(summary = "Удаление клиента")
     public ResponseEntity<?> deleteCustomer(@PathVariable int idCustomer) {
-        return ResponseEntity.ok().build();
+        service.deleteCustomer(idCustomer);
+        return ResponseEntity.accepted().build();
+
     }
 }

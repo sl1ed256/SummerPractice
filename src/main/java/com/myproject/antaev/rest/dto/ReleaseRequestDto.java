@@ -6,6 +6,9 @@ import java.util.Date;
 
 @Schema(description = "Проект (запрос)")
 public class ReleaseRequestDto {
+
+    @Schema(description = "ID проекта")
+    private int projectNumber;
     @Schema(description = "Версия релиза")
     private int releaseVersion;
     @Schema(description = "Дата начала релиза")
@@ -24,8 +27,15 @@ public class ReleaseRequestDto {
     public Date getStartTime() {
         return startTime;
     }
+    public int getProjectNumber() {
+        return projectNumber;
+    }
 
-    public void setStart_time(Date start_time) {
+    public void setProjectNumber(int projectNumber) {
+        this.projectNumber = projectNumber;
+    }
+
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 

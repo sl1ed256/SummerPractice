@@ -11,7 +11,7 @@ public class ProjectRequestDto {
     @Schema(description = "Наименование проекта")
     private String nameOfProject;
     @Schema(description = "Заказчик")
-    private CustomerResponseDto customer;
+    private int customer;
     @Schema(description = "Версия релиза")
     private int releaseVersion;
     @Schema(description = "Статус проекта")
@@ -33,14 +33,6 @@ public class ProjectRequestDto {
         this.nameOfProject = nameOfProject;
     }
 
-    public CustomerResponseDto getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(CustomerResponseDto customer) {
-        this.customer = customer;
-    }
-
     public int getReleaseVersion() {
         return releaseVersion;
     }
@@ -55,5 +47,17 @@ public class ProjectRequestDto {
 
     public void setStatus(StatusProject status) {
         this.status = status;
+    }
+
+    public int getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(int customer) {
+        this.customer = customer;
+    }
+
+    public void setReleaseVersion(int releaseVersion) {
+        this.releaseVersion = releaseVersion;
     }
 }
