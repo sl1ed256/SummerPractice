@@ -3,6 +3,7 @@ package com.myproject.antaev.rest.controllers;
 import com.myproject.antaev.rest.controllers.exceptions.TestRuntimeExceptions;
 import com.myproject.antaev.rest.dto.ReleaseRequestDto;
 import com.myproject.antaev.rest.dto.ReleaseResponseDto;
+import com.myproject.antaev.service.ReleaseService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -24,36 +25,39 @@ import java.util.List;
 @RequestMapping("/api/releases")
 @Tag(name = "Релизы поектов", description = "Редактирование релизов")
 public class ReleaseController {
+    private final ReleaseService releaseService;
+
+    public ReleaseController(ReleaseService releaseService) {
+        this.releaseService = releaseService;
+    }
 
     @GetMapping
     @Operation(summary = "Список релизов")
-    public ResponseEntity<List<ReleaseResponseDto>> getReleases() {
-        List<ReleaseResponseDto> list = new ArrayList<>();
-        list.add(new ReleaseResponseDto(1, 1, new Date(), new Date()));
-        list.add(new ReleaseResponseDto(2, 1, new Date(), new Date()));
-        list.add(new ReleaseResponseDto(3, 3, new Date(), new Date()));
+    public ResponseEntity<List<ReleaseResponseDto>> readListReleasesOfProject(@PathVariable int projectNumber) {
+        List<ReleaseResponseDto> list = releaseService.readListReleaseByProjectId(projectNumber);
         return ResponseEntity.ok(list);
     }
 
     @PostMapping
     @Operation(summary = "Создание релиза")
     public ResponseEntity<ReleaseResponseDto> createRelease(@RequestBody ReleaseRequestDto requestDto) {
-        return ResponseEntity.ok()
-                .body(new ReleaseResponseDto(1, requestDto.getReleaseVersion(), new Date(), new Date()));
+        ReleaseResponseDto responseDto = releaseService.createRelease(requestDto);
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @PutMapping(value = "/{releaseId}")
     @Operation(summary = "Изменение релиза")
     public ResponseEntity<ReleaseResponseDto> updateRelease(@RequestBody ReleaseRequestDto requestDto,
-                                                            @PathVariable int releaseId) {
-        return ResponseEntity.ok()
-                .body(new ReleaseResponseDto(releaseId, requestDto.getReleaseVersion(), requestDto.getStartTime(), requestDto.getEndTime()));
+                                                            @PathVariable int releaseVersion) {
+        ReleaseResponseDto responseDto = releaseService.updateRelease(requestDto, releaseVersion);
+        return ResponseEntity.ok().body(responseDto);
     }
 
     @DeleteMapping(value = "/{releaseId}")
     @Operation(summary = "Удаление релиза")
-    public ResponseEntity<?> deleteRelease(@PathVariable Long releaseId) {
-        throw new TestRuntimeExceptions();
+    public ResponseEntity<?> deleteRelease(@PathVariable int releaseVersion) {
+        releaseService.deleteRelease(releaseVersion);
+        return ResponseEntity.accepted().build();
     }
 }
 

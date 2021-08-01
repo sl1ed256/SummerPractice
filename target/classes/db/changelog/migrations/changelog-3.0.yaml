@@ -1,0 +1,34 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 000000-create-table-release
+      author: Antaev Matvey
+      changes:
+        - createTable:
+            tableName: release
+            columns:
+              - column: { name: projectNumber, type: int, autoIncrement: true, constraints: { primaryKey: true } }
+              - column: { name: releaseVersion, type: int, constraints: { nullable: true } }
+              - column: { name: startTime, type: datetime }
+              - column: { name: endTime, type: datetime }
+
+  - changeSet:
+      id: 000000-add-comments-release
+      author: Antaev Matvey
+      changes:
+        - sql:
+            dbms: postgresql
+            stripComments: true
+            sql: comment on table project is 'Таблица хранения релизов';
+
+  - changeSet:
+      id: 000000-release-project
+      author: Antaev Matvey
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: projectNumber
+            baseTableName: release
+            constraintName: fk_release_project
+            referencedColumnNames: projectNumber
+            referencedTableName: project
+            validate: true

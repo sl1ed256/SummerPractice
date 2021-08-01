@@ -9,14 +9,11 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ProjectMapper {
     @Mapping(target = "customer", source = "customer.id")
     ProjectResponseDto entityToResponseDto(ProjectEntity projectEntity);
-
-    List<ProjectResponseDto> listEntityToListResponseDto(List<ProjectEntity> listProjectEntity);
 
     @Mapping(target = "customer", ignore = true)
     ProjectEntity requestDtoToEntity(ProjectRequestDto projectRequestDto, @MappingTarget ProjectEntity projectEntity);

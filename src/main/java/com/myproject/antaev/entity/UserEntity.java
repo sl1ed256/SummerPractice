@@ -30,4 +30,27 @@ public class UserEntity {
     @Column(name = "userRights")
     @Enumerated(EnumType.STRING)
     private Set<UserRights> userRights;
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+
+    public String getNameUser() {
+        return nameUser;
+    }
+
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
+    }
+
+    public Set<UserRights> getUserRights() {
+        return userRights;
+    }
+
+    public void setUserRights(Set<UserRights> userRights) {
+        this.userRights = userRights;
+    }
 }
