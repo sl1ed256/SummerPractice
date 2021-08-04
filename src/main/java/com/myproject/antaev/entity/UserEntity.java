@@ -25,8 +25,6 @@ public class UserEntity {
     @Column(nullable = false)
     private String nameUser;
 
-    @ElementCollection()
-    @CollectionTable(name = "userRights", joinColumns = @JoinColumn(name = "idUser"))
     @Column(name = "userRights")
     @Enumerated(EnumType.STRING)
     private Set<UserRights> userRights;

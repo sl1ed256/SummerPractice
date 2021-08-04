@@ -59,6 +59,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     private CustomerEntity getOrElseThrow(int idCustomer) {
         Optional<CustomerEntity> optionalCustomer = repository.findById(idCustomer);
-        return optionalCustomer.orElseThrow(() -> new NotFoundException(String.format("Такого заказчика не существует")));
+        return optionalCustomer.orElseThrow(() -> new NotFoundException(String.format("Клиента с номером = %d не найдено", idCustomer)));
     }
 }

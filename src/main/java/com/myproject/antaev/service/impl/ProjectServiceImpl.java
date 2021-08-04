@@ -51,6 +51,6 @@ public class ProjectServiceImpl implements ProjectService {
 
     private ProjectEntity getOrElseThrow(int projectNumber) {
         Optional<ProjectEntity> projectEntity = repository.findById(projectNumber);
-        return projectEntity.orElseThrow(() -> new NotFoundException(String.format("Такого заказчика не существует")));
+        return projectEntity.orElseThrow(() -> new NotFoundException(String.format("Проект с номером = %d не найден", projectNumber)));
     }
 }

@@ -52,7 +52,7 @@ public class TaskServiceImpl implements TaskService {
 
     private TaskEntity getOrElseThrow(int id) {
         Optional<TaskEntity> TaskEntity = repository.findById(id);
-        return TaskEntity.orElseThrow(() -> new NotFoundException(String.format("Задачи с таким id не существует")));
+        return TaskEntity.orElseThrow(() -> new NotFoundException(String.format("Задачи с номером = %d не найдено",id)));
     }
 
 

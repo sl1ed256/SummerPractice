@@ -58,6 +58,6 @@ public class UserServiceImpl implements UserService {
 
     private UserEntity getOrElseThrow(int userId) {
         Optional<UserEntity> userOptional = repository.findById(userId);
-        return userOptional.orElseThrow(() -> new NotFoundException(String.format("Такого пользователя не существует")));
+        return userOptional.orElseThrow(() -> new NotFoundException(String.format("Пользователь с номером = %d не найден", userId)));
     }
 }
