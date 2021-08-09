@@ -5,6 +5,7 @@ import com.myproject.antaev.rest.data_type.UserRights;
 import com.myproject.antaev.rest.dto.UserRequestDto;
 import com.myproject.antaev.rest.dto.UserResponseDto;
 
+import com.myproject.antaev.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
@@ -20,51 +21,49 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
 @Tag(name = "Пользователи", description = "Редактирование пользователей системы")
 public class UserController {
+    private final UserService service;
+
+    public UserController(UserService service) {
+        this.service = service;
+    }
 
     @GetMapping
     @Operation(summary = "Список пользователей")
-    public ResponseEntity<List<UserResponseDto>> getUsers() {
-        List<UserResponseDto> list = new ArrayList<>();
-        list.add(new UserResponseDto(3, "Aaaa", new ArrayList<>()));
-        list.add(new UserResponseDto(4, "Bbbb", new ArrayList<>()));
-        list.add(new UserResponseDto(5, "Cccc", new ArrayList<>()));
+    public ResponseEntity<List<UserResponseDto>> getListUsers() {
+        List<UserResponseDto> list = service.getListUsers();
         return ResponseEntity.ok().body(list);
     }
 
     @PostMapping
     @Operation(summary = "Создать пользователя")
     public ResponseEntity<UserResponseDto> createUser(@RequestBody UserRequestDto requestDto) {
-        List<UserRights> userRights = new ArrayList<>();
-        userRights.add(UserRights.ALL);
-        return ResponseEntity.ok()
-                .body(new UserResponseDto(3, requestDto.getNameUser(), userRights));
+        UserResponseDto userResponseDto = service.createUser(requestDto);
+        return ResponseEntity.ok().body(userResponseDto);
     }
 
     @PutMapping(value = "/{userId}")
-    @Operation(summary = "Измененить пользователя")
+    @Operation(summary = "Изменить пользователя")
     public ResponseEntity<UserResponseDto> updateUser(@RequestBody UserRequestDto requestDto,
                                                       @PathVariable int userId) {
-        List<UserRights> userRights = new ArrayList<>();
-        return ResponseEntity.ok()
-                .body(new UserResponseDto(userId, requestDto.getNameUser(), userRights));
+        UserResponseDto userResponseDto = service.updateUser(requestDto, userId);
+        return ResponseEntity.ok().body(userResponseDto);
     }
 
     @DeleteMapping(value = "/{userId}")
     @Operation(summary = "Удалить пользователя")
     public ResponseEntity<?> deleteUser(@PathVariable int userId) {
-        return ResponseEntity.ok().build();
+        service.deleteUser(userId);
+        return ResponseEntity.accepted().build();
     }
 
     @ExceptionHandler(IOException.class)
     public ResponseEntity handleException(IOException e) {
-        //
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 }

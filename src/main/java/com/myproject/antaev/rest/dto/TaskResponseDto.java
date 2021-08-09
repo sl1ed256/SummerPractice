@@ -21,15 +21,6 @@ public class TaskResponseDto {
     @Schema(description = "Статус задачи")
     private StatusTask taskStatus;
 
-    public TaskResponseDto(int projectNumber, int releaseVersion, int taskNumber, UserResponseDto author, String taskName, StatusTask taskStatus) {
-        this.projectNumber = projectNumber;
-        this.releaseVersion = releaseVersion;
-        this.taskNumber = taskNumber;
-        this.author = author;
-        this.performer = performer;
-        this.taskName = taskName;
-        this.taskStatus = taskStatus;
-    }
 
     public int getProjectNumber() {
         return projectNumber;

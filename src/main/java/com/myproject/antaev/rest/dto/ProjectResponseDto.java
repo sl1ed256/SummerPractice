@@ -10,38 +10,51 @@ public class ProjectResponseDto {
     @Schema(description = "Наименование проекта")
     private String nameOfProject;
     @Schema(description = "Заказчик")
-    private CustomerResponseDto customer;
+    private int customer;
     @Schema(description = "Версия релиза")
     private int releaseVersion;
     @Schema(description = "Статус проекта")
     private StatusProject status;
 
-    public ProjectResponseDto(int projectNumber, String nameOfProject, CustomerResponseDto customer, Integer releaseVersion, StatusProject status) {
-        this.projectNumber = projectNumber;
-        this.nameOfProject = nameOfProject;
-        this.customer = customer;
-        this.releaseVersion = releaseVersion;
-        this.status = status;
-    }
-
     public int getProjectNumber() {
         return projectNumber;
+    }
+
+    public void setProjectNumber(int projectNumber) {
+        this.projectNumber = projectNumber;
     }
 
     public String getNameOfProject() {
         return nameOfProject;
     }
 
-    public CustomerResponseDto getCustomer() {
+    public void setNameOfProject(String nameOfProject) {
+        this.nameOfProject = nameOfProject;
+    }
+
+    public int getCustomer() {
         return customer;
+    }
+
+    public void setCustomer(int customer) {
+        this.customer = customer;
     }
 
     public int getReleaseVersion() {
         return releaseVersion;
     }
 
+    public void setReleaseVersion(int releaseVersion) {
+        this.releaseVersion = releaseVersion;
+    }
+
     public StatusProject getStatus() {
         return status;
     }
+
+    public void setStatus(StatusProject status) {
+        this.status = status;
+    }
+
 
 }

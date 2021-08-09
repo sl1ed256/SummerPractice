@@ -10,10 +10,6 @@ public class CustomerResponseDto {
     @Schema(description = "Имя заказчика")
     private String nameCustomer;
 
-    public CustomerResponseDto(int idCustomer, String nameCustomer) {
-        this.idCustomer = idCustomer;
-        this.nameCustomer = nameCustomer;
-    }
 
     public int getIdCustomer() {
         return idCustomer;

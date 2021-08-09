@@ -5,6 +5,7 @@ import com.myproject.antaev.rest.dto.CustomerResponseDto;
 import com.myproject.antaev.rest.dto.ProjectRequestDto;
 import com.myproject.antaev.rest.dto.ProjectResponseDto;
 
+import com.myproject.antaev.service.ProjectService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -18,45 +19,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.FileNotFoundException;
+
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/projects")
 @Tag(name = "Проекты", description = "Редактирование проектов")
 public class ProjectController {
+    private final ProjectService service;
+
+    public ProjectController(ProjectService service) {
+        this.service = service;
+    }
 
     @GetMapping
     @Operation(summary = "Список проектов")
     public ResponseEntity<List<ProjectResponseDto>> getProjects() {
         List<ProjectResponseDto> list = new ArrayList<>();
-        list.add(new ProjectResponseDto(1, "First", new CustomerResponseDto(1, "Motya"), 1, StatusProject.CLOSED));
-        list.add(new ProjectResponseDto(2, "Second", new CustomerResponseDto(2, "Vitya"), 2, StatusProject.OPEN));
         return ResponseEntity.ok(list);
     }
 
     @PostMapping
     @Operation(summary = "Создание проекта")
     public ResponseEntity<ProjectResponseDto> createProject(@RequestBody ProjectRequestDto requestDto) {
-        return ResponseEntity.ok()
-                .body(new ProjectResponseDto(3, requestDto.getNameOfProject(), requestDto.getCustomer(), 2,
-                        requestDto.getStatus()));
+        return ResponseEntity.ok().body(service.createProject(requestDto));
     }
 
     @PutMapping(value = "/{idProject}")
     @Operation(summary = "Изменение проекта")
     public ResponseEntity<ProjectResponseDto> updateProject(@RequestBody ProjectRequestDto requestDto,
                                                             @PathVariable int idProject) {
-        return ResponseEntity.ok()
-                .body(new ProjectResponseDto(3, "Motya", new CustomerResponseDto(1, "Name1"), requestDto.getReleaseVersion(),
-                        requestDto.getStatus()));
+        return ResponseEntity.ok().body(service.updateProject(requestDto, idProject));
     }
 
     @DeleteMapping(value = "/{idProject}")
     @Operation(summary = "Удаление проекта")
-    public ResponseEntity<?> deleteProject(@PathVariable int idProject) throws FileNotFoundException {
-        throw new FileNotFoundException();
+    public ResponseEntity<?> deleteProject(@PathVariable int idProject) {
+        service.deleteProject(idProject);
+        return ResponseEntity.accepted().build();
     }
 }

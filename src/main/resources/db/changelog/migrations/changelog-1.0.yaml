@@ -1,0 +1,20 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: 000000-create-table-customer
+      author: Antaev Matvey
+      changes:
+        - createTable:
+            tableName: customer
+            columns:
+              - column: { name: idCustomer, type: int, autoIncrement: true, constraints: { primaryKey: true } }
+              - column: { name: nameCustomer, type: varchar(50), constraints: { nullable: true } }
+
+  - changeSet:
+      id: 000000-add-comments-customer
+      author: Antaev Matvey
+      changes:
+        - sql:
+            dbms: postgresql
+            stripComments: true
+            sql: comment on table project is 'Таблица хранения заказчиков';
