@@ -6,6 +6,7 @@ import com.myproject.antaev.repository.ProjectRepository;
 import com.myproject.antaev.rest.controllers.exceptions.NotFoundException;
 import com.myproject.antaev.rest.dto.ProjectRequestDto;
 import com.myproject.antaev.rest.dto.ProjectResponseDto;
+import com.myproject.antaev.service.ProjectChange;
 import com.myproject.antaev.service.ProjectService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,10 +17,12 @@ import java.util.Optional;
 public class ProjectServiceImpl implements ProjectService {
     private final ProjectMapper mapper;
     private final ProjectRepository repository;
+    private final ProjectChange changer;
 
-    public ProjectServiceImpl(ProjectMapper mapper, ProjectRepository repository) {
+    public ProjectServiceImpl(ProjectMapper mapper, ProjectRepository repository, ProjectChange changer) {
         this.mapper = mapper;
         this.repository = repository;
+        this.changer = changer;
     }
 
     @Override
@@ -39,7 +42,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional
     public ProjectResponseDto updateProject(ProjectRequestDto projectRequestDto, int projectNumber) {
         ProjectEntity projectEntity = getOrElseThrow(projectNumber);
-        projectEntity = mapper.requestDtoToEntity(projectRequestDto, projectEntity);
+        projectEntity =  changer.change(projectRequestDto, projectEntity);
         return mapper.entityToResponseDto(projectEntity);
     }
 
